@@ -1,0 +1,26 @@
+.brand-logo {
+  margin-left: 15px;
+  font-family: 'Baloo', cursive;
+}
+
+.card .card-content .card-title {
+  margin-bottom: 10px;
+}
+
+header {
+  height: 100px;
+}
+.collection-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#search-row form {
+  padding-top: 20px;
+}
+
+.student-name {
+  position: relative;
+  top: -5px;
+}

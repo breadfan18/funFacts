@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SEIR-Flex Student Fun Facts</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo&display=swap" rel="stylesheet">
+  <!-- Materialize Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Materialize CSS Framework -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- JavaScript for Materialize -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper purple">
+        <a href="" class="brand-logo left">SEIR-Flex Student Fun Facts</a>
+        <ul class="right">
+          <li><a href="/">Home</a></li>
+          <li>
+            <% if(user) { %>
+              <a href="/logout"><i class="material-icons left">trending_flat</i>Logout</a>
+            <% } else { %>
+              <a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a>
+            <% } %> 
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <header class="container">
+
+  </header>
+  <main class="container">
+    <div class="row">
+      <div id="students" class="col s12">
+        <% students.forEach(function(student) { %>
+          <div class="card purple">
+            <div class="card-content white-text">
+              <div>
+                <span class="card-title">
+                  <img src="<%= student.avatarURL %> " alt="<%= student.name %> " class="circle small responsive-img">
+                  <span class="student-name"><%= student.name %></span>
+                  <% if (student.cohort) { %><span class="badge white">SEI <%= student.cohort %></span><% } %>
+                </span>
+              </div>
+              <ul class="collection">
+                <% student.facts.forEach(function(fact) { %>
+                  <li class="collection-item blue-grey-text text-darken-2"><%= fact.text %>
+                    <% if(student._id.equals(user && user._id)) { %> 
+                    <form action="/facts/<%= fact._id %>?_method=DELETE" method="POST">
+                      <button type="submit" class="btn red white-text btn-small">Delete</button>
+                    </form>
+                    <% } %>
+                  </li>
+                  
+                <% }) %>
+              </ul>
+              <!-- Place Add Fact UI Here -->
+              <% if(student._id.equals(user && user._id)) { %> 
+                  <div class="card-action">
+                    <form action="/facts" method="POST">
+                      <input type="text" name="text">
+                      <button type="submit" class="btn white-text">Add Fact</button>
+                    </form>
+                  </div>
+              <% } %> 
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
