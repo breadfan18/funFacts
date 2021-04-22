@@ -48,7 +48,7 @@
                   <% if (student.cohort) { %><span class="badge white">SEI <%= student.cohort %></span><% } %>
                 </span>
               </div>
-              <ul class="collection">
+            <ul class="collection">
                 <% student.facts.forEach(function(fact) { %>
                   <li class="collection-item blue-grey-text text-darken-2"><%= fact.text %>
                     <% if(student._id.equals(user && user._id)) { %> 
